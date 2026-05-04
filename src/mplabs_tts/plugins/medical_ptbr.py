@@ -45,7 +45,12 @@ _RULES: list[PronunciationRule] = [
     (re.compile(r"\bTx\b"), "tratamento"),
     (re.compile(r"\bSx\b"), "sintomas"),
 
-    # Vias de administração
+    # Vias de administração — formas "via XX" mais específicas vêm primeiro
+    # para não duplicar a palavra "via" ("via VO" → "via oral", não "via via oral")
+    (re.compile(r"\bvia VO\b"), "via oral"),
+    (re.compile(r"\bvia IM\b"), "via intramuscular"),
+    (re.compile(r"\bvia IV\b"), "via intravenosa"),
+    (re.compile(r"\bvia SC\b"), "via subcutânea"),
     (re.compile(r"\bVO\b"), "via oral"),
     (re.compile(r"\bIM\b"), "intramuscular"),
     (re.compile(r"\bIV\b"), "intravenosa"),
