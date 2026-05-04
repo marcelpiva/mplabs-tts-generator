@@ -1,0 +1,6 @@
+f5-tts
+soundfile
+numpy
+pydub
+click>=8.1
+huggingface_hub>=0.20

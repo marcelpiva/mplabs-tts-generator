@@ -1,0 +1,22 @@
+[
+  {
+    "id": "intro",
+    "text": "Olá, mundo. Bem-vindos ao mplabs-tts.",
+    "metadata": { "tag": "demo", "section": "intro" }
+  },
+  {
+    "id": "numbers_demo",
+    "text": "O Brasil tem cerca de 213.000.000 habitantes e o IPCA acumulado em 12 meses foi de 4,5%.",
+    "metadata": { "tag": "demo", "section": "numbers" }
+  },
+  {
+    "id": "ordinals_demo",
+    "text": "O 1o passo é simples; a 2a etapa exige atenção; o 3o estágio é decisivo.",
+    "metadata": { "tag": "demo", "section": "ordinals" }
+  },
+  {
+    "id": "abbrev_demo",
+    "text": "Dr. Silva, Profa. Costa e o Sr. Almeida vão se reunir 24/7 — atualizado a cada P.S. publicado.",
+    "metadata": { "tag": "demo", "section": "abbreviations" }
+  }
+]
