@@ -62,6 +62,11 @@ _RULES: list[PronunciationRule] = [
     (re.compile(r"\bICD-10\b"), "Cê Í Dê dez"),
 ]
 
+# Nota: oxítonas em -ol/-il (paracetamol, captopril, omeprazol, etc.) saem da
+# pronúncia universal pt-BR e ficam em `languages/pt_br/pronunciation.py`. Aqui
+# ficam apenas regras estritamente de domínio médico (unidades, posologia,
+# acrônimos clínicos, vias de administração).
+
 _EXTRA_ACCENTS: dict[str, str] = {
     # Termos médicos especializados não cobertos no léxico geral
     "epidemiologico": "epidemiológico", "epidemiologica": "epidemiológica",

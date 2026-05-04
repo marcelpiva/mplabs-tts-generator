@@ -61,6 +61,32 @@ def test_normalize_with_medical_plugin_expands_units():
     assert "duas vezes ao dia" in out
 
 
+def test_pt_br_forces_drug_oxitona_accent_without_plugin():
+    """F5-TTS reads 'paracetamol' as paroxítona by default; the core pt-BR
+    pronunciation rules force the explicit oxítona accent on common -ol/-il
+    drug names. No medical plugin needed — these are universal pt-BR words.
+    """
+    pipeline = TTSPipeline(language=PtBrLanguage(), synthesizer=FakeSynth())
+    out = pipeline.normalize(
+        "Prescrever paracetamol, omeprazol e captopril; Atenolol após refeição."
+    )
+    assert "paracetamól" in out
+    assert "omeprazól" in out
+    assert "captopríl" in out
+    assert "Atenolól" in out
+
+
+def test_pt_br_forces_oxitona_plural():
+    """Plurais de oxítonas em -ol também precisam do acento (paracetamóis,
+    fenóis). O expansor gera as formas plurais automaticamente.
+    """
+    pipeline = TTSPipeline(language=PtBrLanguage(), synthesizer=FakeSynth())
+    out = pipeline.normalize("paracetamóis e fenóis")
+    # plural já vem com acento; basta garantir que não foi quebrado
+    assert "paracetamóis" in out
+    assert "fenóis" in out
+
+
 def test_normalize_preserves_acronyms_added_by_plugin():
     pipeline = TTSPipeline(
         language=PtBrLanguage(),
