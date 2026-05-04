@@ -31,7 +31,13 @@ class PtBrLanguage(LanguageModule):
         return PT_BR_PROSODY_RULES
 
     def extra_keep_upper(self) -> Iterable[str]:
-        return ("PIB", "OMS")
+        # Acrônimos universais pt-BR que NÃO devem ser titlecased pelo
+        # normalizador de ALL-CAPS, pra que cheguem inteiros nas regras de
+        # prosódia (que substituem por "I A", "P D F", etc.).
+        return (
+            "PIB", "OMS", "IA", "IoT", "PDF", "URL", "API",
+            "CEP", "CPF", "CNPJ", "RG", "UTF",
+        )
 
 
 __all__ = ["PtBrLanguage"]

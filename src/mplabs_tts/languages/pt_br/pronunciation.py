@@ -181,6 +181,72 @@ ANGLICISMOS_CONSAGRADOS: list[PronunciationRule] = [
     (re.compile(r"\bCPF\b"), "C P F"),
     (re.compile(r"\bCNPJ\b"), "C N P J"),
     (re.compile(r"\bRG\b"), "R G"),
+    # IA tem que ser case-sensitive (\bIA\b com flag default não basta — Python
+    # re é case-sensitive por padrão, então `IA` ≠ `ia`/`Ia`. Bom.) "ia" lower
+    # é pretérito do verbo "ir" e NÃO deve virar "I A".
+    (re.compile(r"\bIA\b"), "I A"),
+    (re.compile(r"\bIoT\b"), "I O T"),
+]
+
+
+# =============================================================================
+# Nomes próprios pt-BR oxítonos terminados em consoante (sem acento gráfico)
+# =============================================================================
+# F5-TTS tende a ler como paroxítona (Éster, Ráfael) quando a tônica deveria
+# ficar na última sílaba (Estér, Rafaél). Forçamos o acento agudo na última
+# vogal pra guiar o modelo. Aplica-se SOMENTE quando capitalizado (nome
+# próprio) — "ester" minúsculo é químico (éster) com acento próprio.
+NOMES_OXITONOS: list[PronunciationRule] = [
+    # Bíblicos / clássicos terminados em -er
+    (re.compile(r"\bEster\b"), "Estér"),
+    # Terminados em -el (oxítonos pt-BR)
+    (re.compile(r"\bRafael\b"), "Rafaél"),
+    (re.compile(r"\bGabriel\b"), "Gabriél"),
+    (re.compile(r"\bDaniel\b"), "Daniél"),
+    (re.compile(r"\bMiguel\b"), "Miguél"),
+    (re.compile(r"\bManuel\b"), "Manuél"),
+    (re.compile(r"\bManoel\b"), "Manoél"),
+    (re.compile(r"\bJoel\b"), "Joél"),
+    (re.compile(r"\bIsrael\b"), "Israél"),
+    (re.compile(r"\bRaquel\b"), "Raquél"),
+    (re.compile(r"\bIsabel\b"), "Isabél"),
+    (re.compile(r"\bMabel\b"), "Mabél"),
+    (re.compile(r"\bEzequiel\b"), "Ezequiél"),
+    (re.compile(r"\bNoel\b"), "Noél"),
+    # Terminados em -or (já tônicos por regra, mas reforça)
+    # (intencionalmente vazio — "Heitor", "Cristóvão" geralmente saem ok)
+]
+
+
+# =============================================================================
+# Vogais médias com timbre fechado (F5 lê com vogal aberta)
+# =============================================================================
+# Palavras pt-BR onde a vogal tônica é fechada (/e/, /o/) mas o modelo F5-TTS
+# lê com vogal aberta (/ɛ/, /ɔ/). Forçamos o circunflexo (ê, ô) pra guiar.
+VOGAIS_FECHADAS: list[PronunciationRule] = [
+    # neutro/neutra — diphthong "eu" closed in pt-BR
+    (re.compile(r"\bneutra\b"), "nêutra"),
+    (re.compile(r"\bNeutra\b"), "Nêutra"),
+    (re.compile(r"\bneutro\b"), "nêutro"),
+    (re.compile(r"\bNeutro\b"), "Nêutro"),
+    (re.compile(r"\bneutras\b"), "nêutras"),
+    (re.compile(r"\bNeutras\b"), "Nêutras"),
+    (re.compile(r"\bneutros\b"), "nêutros"),
+    (re.compile(r"\bNeutros\b"), "Nêutros"),
+]
+
+
+# =============================================================================
+# Monossílabos tônicos com vogal aberta (F5 atenua)
+# =============================================================================
+# Lista mínima — só onde o modelo realmente subentona. Cuidado: monossílabos
+# muito comuns (mar, sol, fé, pé) geralmente saem corretos. Adicionar só
+# quando confirmado em smoke test acústico.
+MONOSSILABOS_TONICOS: list[PronunciationRule] = [
+    (re.compile(r"\bvoz\b"), "vóz"),
+    (re.compile(r"\bVoz\b"), "Vóz"),
+    (re.compile(r"\bvozes\b"), "vózes"),
+    (re.compile(r"\bVozes\b"), "Vózes"),
 ]
 
 
@@ -188,5 +254,10 @@ ANGLICISMOS_CONSAGRADOS: list[PronunciationRule] = [
 # Combinação final exportada
 # =============================================================================
 PT_BR_PRONUNCIATION_RULES: list[PronunciationRule] = (
-    TITULOS_EXTRA + OXITONAS_FORCADAS + ANGLICISMOS_CONSAGRADOS
+    TITULOS_EXTRA
+    + OXITONAS_FORCADAS
+    + NOMES_OXITONOS
+    + VOGAIS_FECHADAS
+    + MONOSSILABOS_TONICOS
+    + ANGLICISMOS_CONSAGRADOS
 )

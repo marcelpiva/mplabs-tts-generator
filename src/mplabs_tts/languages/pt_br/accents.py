@@ -321,9 +321,51 @@ _CONTEM_PHRASES: list[tuple[str, str]] = [
     (r"\bcontem informações\b", "contém informações"),
 ]
 
+# "esta" → "ésta" (demonstrativo, vogal aberta /ɛs.tɐ/) — só em contextos
+# inequivocamente substantivais. Não conflita com `esta` verbo (`está`)
+# porque casamos o substantivo seguinte. NÃO inclui colocações onde "esta"
+# é claramente verbo (esta vendo, esta sendo) — essas vão pra _ESTA_VERB_PHRASES.
+_ESTA_DEMONSTRATIVO_PHRASES: list[tuple[str, str]] = [
+    (r"\besta noite\b", "ésta noite"),
+    (r"\bEsta noite\b", "Ésta noite"),
+    (r"\besta manhã\b", "ésta manhã"),
+    (r"\bEsta manhã\b", "Ésta manhã"),
+    (r"\besta tarde\b", "ésta tarde"),
+    (r"\bEsta tarde\b", "Ésta tarde"),
+    (r"\besta hora\b", "ésta hora"),
+    (r"\bEsta hora\b", "Ésta hora"),
+    (r"\besta semana\b", "ésta semana"),
+    (r"\bEsta semana\b", "Ésta semana"),
+    (r"\besta vez\b", "ésta vez"),
+    (r"\bEsta vez\b", "Ésta vez"),
+    (r"\besta viagem\b", "ésta viagem"),
+    (r"\bEsta viagem\b", "Ésta viagem"),
+    (r"\besta pergunta\b", "ésta pergunta"),
+    (r"\bEsta pergunta\b", "Ésta pergunta"),
+    (r"\besta resposta\b", "ésta resposta"),
+    (r"\bEsta resposta\b", "Ésta resposta"),
+    (r"\besta cena\b", "ésta cena"),
+    (r"\bEsta cena\b", "Ésta cena"),
+    (r"\besta página\b", "ésta página"),
+    (r"\bEsta página\b", "Ésta página"),
+    (r"\besta região\b", "ésta região"),
+    (r"\bEsta região\b", "Ésta região"),
+    (r"\besta cidade\b", "ésta cidade"),
+    (r"\bEsta cidade\b", "Ésta cidade"),
+    (r"\besta vida\b", "ésta vida"),
+    (r"\bEsta vida\b", "Ésta vida"),
+    (r"\besta área\b", "ésta área"),
+    (r"\bEsta área\b", "Ésta área"),
+    (r"\besta forma\b", "ésta forma"),
+    (r"\bEsta forma\b", "Ésta forma"),
+    (r"\besta maneira\b", "ésta maneira"),
+    (r"\bEsta maneira\b", "Ésta maneira"),
+]
+
 PHRASE_RULES: list[tuple[str, str]] = (
     _E_VERB_PHRASES
     + _ESTA_VERB_PHRASES
+    + _ESTA_DEMONSTRATIVO_PHRASES
     + _LA_PHRASES
     + _NOS_PHRASES
     + _CONTEM_PHRASES
