@@ -128,7 +128,7 @@ class TTSPipeline:
 
         if as_mp3 and out.suffix.lower() == ".mp3":
             wav_tmp = out.with_suffix(".wav.tmp")
-            sf.write(str(wav_tmp), wav, sr)
+            sf.write(str(wav_tmp), wav, sr, format="WAV")
             try:
                 wav_to_mp3(wav_tmp, out)
             finally:
